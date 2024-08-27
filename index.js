@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 });
 //new route
 app.get('/new', (req, res) => {
-    res.render('new');
+    res.render('new', { title: "Add New Message", message: null });
 });
 app.post('/new', (req, res) => {
     const { username, content } = req.body;
@@ -41,10 +41,17 @@ app.post('/new', (req, res) => {
 });
 
 app.get('/edit/:id', (req, res) => {
-    const messageIndex = req.params.id;
+    const messageIndex = parseInt(req.params.id, 10);
+
+    // Check if the index is valid
+    if (isNaN(messageIndex) || messageIndex < 0 || messageIndex >= messages.length) {
+        return res.status(404).send("Message not found.");
+    }
+
     const message = messages[messageIndex];
     res.render('new', { title: "Edit Message", message: message, messageIndex: messageIndex });
 });
+
 
 app.post('/edit/:id', (req, res) => {
     const messageIndex = req.params.id;
