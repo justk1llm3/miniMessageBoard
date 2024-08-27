@@ -39,6 +39,20 @@ app.post('/new', (req, res) => {
     messages.push(newMessage);
     res.redirect('/');
 });
+
+app.get('/edit/:id', (req, res) => {
+    const messageIndex = req.params.id;
+    const message = messages[messageIndex];
+    res.render('new', { title: "Edit Message", message: message, messageIndex: messageIndex });
+});
+
+app.post('/edit/:id', (req, res) => {
+    const messageIndex = req.params.id;
+    messages[messageIndex].user = req.body.username;
+    messages[messageIndex].text = req.body.content;
+    res.redirect('/');
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });

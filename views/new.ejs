@@ -3,22 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Message</title>
+    <title><%= title %></title>
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <h1>Add a New Message</h1>
-    <form method="POST" action="/new">
+    <h1><%= title %></h1>
+    <form method="POST" action="<%= message ? '/edit/' + messageIndex : '/new' %>">
         <div>
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+            <input type="text" id="username" name="username" value="<%= message ? message.user : '' %>" required>
         </div>
         <div>
             <label for="content">Message:</label>
-            <textarea id="content" name="content" required></textarea>
-        </div>
-        <div>
-            <input type="hidden" name="date" value="<%= new Date() %>">
+            <textarea id="content" name="content" required><%= message ? message.text : '' %></textarea>
         </div>
         <div>
             <button type="submit">Submit</button>

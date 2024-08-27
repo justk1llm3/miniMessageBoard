@@ -15,9 +15,9 @@
         <button type="submit">Add New Message</button>
     </form>
     <ul>
-        <% messages.forEach((user)=> { %>
-            <%- include('message', {user: user}); %>
-                <% }); %>
+        <% messages.forEach((user, index) => { %>
+            <%- include('message', { user: user, index: index }); %>
+        <% }); %>
     </ul>
 </body>
 

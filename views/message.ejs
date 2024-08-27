@@ -6,4 +6,7 @@
     <div class="message-text">
         <%= user.text %>
     </div>
+    <form action="/edit/<%= index %>" method="GET">
+        <button type="submit">Edit</button>
+    </form>
 </li>
